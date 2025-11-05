@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Паспорт РФ</title>
+    <link rel="stylesheet" href="styles/passport.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poiret+One&family=PT+Sans+Caption&display=swap" rel="stylesheet">
+</head>
+<body class="passport-page-body">
+    <!-- ШАПКА -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">🚴 Velosipedik</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="index.html#menu">Меню</a></li>
+                    <li><a href="index.html#delivery">О нас</a></li>
+                    <li><a href="aboutyou.html">Ваши контакты</a></li>
+                    <li><a href="algorythm.html">Тест на Велосипедик</a></li>
+                    <li><a href="dom_js.html">Паспорт</a></li>
+                     <li><a href="table.html">Таблица</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ОСНОВНАЯ ЧАСТЬ -->
+    <main class="passport-page">
+        <h1>ИЗМЕНЯЕМ КИРИЛЛИЦУ НА ЛАТИНИЦУ ПО КЛИКУ</h1>
+        <div class="container">
+            <div class="simple-controls">
+                <button id="translateBtn" class="action-btn">Перевести на латиницу</button>
+                <button id="resetBtn" class="action-btn">Вернуть кириллицу</button>
+            </div>
+            <div class="passport-section">
+                <div class="passport-container">
+                    <div class="passport-image-wrapper">
+                        <!-- ФОТО ПАСПОРТА -->
+                        <img src="images/passport.png" alt="Паспорт РФ" class="passport-template">
+                        
+                        <div class="passport-text-overlay">
+                           
+                            <div class="text-element passport-title">РОССИЙСКАЯ ФЕДЕРАЦИЯ</div>
+                            <div class="text-element passport-issued">ОТДЕЛОМ УФМС</div>
+                            <div class="text-element passport-area">ПО РОСТОВСКОЙ ОБЛАСТИ</div>
+                            <div class="text-element passport-date">05.03.2024</div>
+                            <div class="text-element passport-code">610-876</div>
+                
+                           
+                            <div class="text-element passport-surname">Щетинина</div>
+                            <div class="text-element passport-name">Арина</div>
+                            <div class="text-element passport-patronymic">Олеговна</div>
+                            <div class="text-element passport-gender">ЖЕН.</div>
+                            <div class="text-element passport-birthdate">14.02.2007</div>
+                            <div class="text-element passport-town">ГОР. РОСТОВ-НА-ДОНУ</div>
+                            <div class="text-element passport-region">РОСТОВСКОЙ ОБЛ.</div>
+    
+                            <div class="photo-placeholder">
+                                <img src="images/skebob.jpg" alt="Фото">
+                            </div>
+                            
+                            <div class="passport-signature-frame">
+                                <img src="images/signature1.png" alt="Подпись" class="passport-signature">
+                            </div>
+                            
+                            <div class="pasport-signature-frame">
+                                <img src="images/signature2.png" alt="Подпись" class="pasport-signature">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() { 
+            const translateBtn = document.getElementById('translateBtn');
+            const resetBtn = document.getElementById('resetBtn');
+            
+            console.log('translateBtn:', translateBtn);
+            console.log('resetBtn:', resetBtn);
+            
+            if (translateBtn && resetBtn) {
+               
+                const translations = {
+                    'РОССИЙСКАЯ ФЕДЕРАЦИЯ': 'RUSSIAN FEDERATION',
+                    'ОТДЕЛОМ УФМС': 'BY UFMS DEPARTMENT',
+                    'ПО РОСТОВСКОЙ ОБЛАСТИ': 'OF ROSTOV REGION',
+                    'Щетинина': 'SHCHETININA',
+                    'Арина': 'ARINA',
+                    'Олеговна': 'OLEGOVNA',
+                    'ЖЕН.': 'FEMALE',
+                    'ГОР. РОСТОВ-НА-ДОНУ': 'ROSTOV-ON-DON CITY',
+                    'РОСТОВСКОЙ ОБЛ.': 'ROSTOV REGION'
+                };
+
+                const reverseTranslations = {
+                    'RUSSIAN FEDERATION': 'РОССИЙСКАЯ ФЕДЕРАЦИЯ',
+                    'BY UFMS DEPARTMENT': 'ОТДЕЛОМ УФМС',
+                    'OF ROSTOV REGION': 'ПО РОСТОВСКОЙ ОБЛАСТИ',
+                    'SHCHETININA': 'Щетинина',
+                    'ARINA': 'Арина',
+                    'OLEGOVNA': 'Олеговна',
+                    'FEMALE': 'ЖЕН.',
+                    'ROSTOV-ON-DON CITY': 'ГОР. РОСТОВ-НА-ДОНУ',
+                    'ROSTOV REGION': 'РОСТОВСКОЙ ОБЛ.'
+                };
+
+                function translateToLatin() {
+                    console.log('Перевод на латиницу...');
+                    const textElements = document.querySelectorAll('.text-element');
+                    console.log('Найдено элементов:', textElements.length);
+                    
+                    textElements.forEach(element => {
+                        const currentText = element.textContent;
+                        console.log('Текст:', currentText);
+                        
+                        if (translations[currentText]) {
+                            element.textContent = translations[currentText];
+                            console.log('Переведено:', currentText, '→', translations[currentText]);
+                        }
+                    });
+
+                    translateBtn.textContent = 'Translated to Latin';
+                    translateBtn.disabled = true;
+                }
+
+                function resetToCyrillic() {
+                    console.log('Возврат к кириллице...');
+                    const textElements = document.querySelectorAll('.text-element');
+                    
+                    textElements.forEach(element => {
+                        const currentText = element.textContent;
+                        if (reverseTranslations[currentText]) {
+                            element.textContent = reverseTranslations[currentText];
+                        }
+                    });
+
+                    translateBtn.textContent = 'Перевести на латиницу';
+                    translateBtn.disabled = false;
+                }
+
+                translateBtn.addEventListener('click', translateToLatin);
+                resetBtn.addEventListener('click', resetToCyrillic);
+                
+                console.log('Обработчики добавлены!');
+            } else {
+                console.error('Кнопки не найдены в DOM!');
+            }
+        }); 
+    </script>
+    <img src="images/console.png" alt="Консоль" class="console-screen">
+</body>
+</html>
